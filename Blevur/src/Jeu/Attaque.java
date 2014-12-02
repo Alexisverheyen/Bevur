@@ -19,13 +19,7 @@ public class Attaque {
 		damage=0;
 	}
 
-	/**
-	 * Constructeur 
-	 * Calcul des points de pouvoirs et des dégats.
-	 * Plus affichage.
-	 * @param attaquant
-	 * @param attaqué
-	 */
+
 	public Attaque(Creature attaquant,Creature attaqué){
 		boolean ok=true;
 		affichageAtk(attaquant);
