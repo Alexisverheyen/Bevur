@@ -19,8 +19,14 @@ public class Attaque {
 		damage=0;
 	}
 
-
-	public Attaque(Creature attaquant,Creature attaquÈ){
+	/**
+	 * Constructeur 
+	 * Calcul des points de pouvoirs et des d√©gats.
+	 * Plus affichage.
+	 * @param attaquant
+	 * @param attaqu√©
+	 */
+	public Attaque(Creature attaquant,Creature attaqu√©){
 		boolean ok=true;
 		affichageAtk(attaquant);
 		do{
@@ -28,9 +34,9 @@ public class Attaque {
 			ok=atkDispo(choixAtk, attaquant);
 		}while (!ok);
 		moinsPP(choixAtk,attaquant);
-		calcDmg(choixAtk, attaquant, attaquÈ);
-		//System.out.println(attaquant.getNom() + " a infligÈ " + getDamage() + " ‡ " + attaquÈ.getNom());
-		//System.out.println(attaquÈ.getNom() + " a " + attaquÈ.getPv() + " restants ");
+		calcDmg(choixAtk, attaquant, attaqu√©);
+		//System.out.println(attaquant.getNom() + " a inflig√© " + getDamage() + " √† " + attaqu√©.getNom());
+		//System.out.println(attaqu√©.getNom() + " a " + attaqu√©.getPv() + " restants ");
 	}
 
 
@@ -47,21 +53,33 @@ public class Attaque {
 			System.out.println(attaquant.getAttaques(i));
 		}
 	}
-
+	
+	/**
+	 * M√©thode qui permet au joueur de choisir la prochaine attaque de sa cr√©ature,
+	 * avec v√©rification.
+	 * @return choixAtk
+	 */
 	public int choixAttaque(){
 		int choixAtk;
 		Scanner sc = new Scanner(System.in);
 		do{
 			choixAtk = sc.nextInt();
 			if (choixAtk<1 || choixAtk>4) 
-				System.out.println("Valeur incorrecte, veuillez rÈitÈrer votre choix");
+				System.out.println("Valeur incorrecte, veuillez r√©it√©rer votre choix");
 			
 		}while(choixAtk<1 || choixAtk>4);
 		return choixAtk;
 		
 		
 	}
-
+	
+	/**
+	 * M√©thode qui v√©rifie si il reste suffisamment de points de pouvoir,
+	 * en fonction de l'attaque choisie en param√®tre.
+	 * @param choixAtk
+	 * @param attaquant
+	 * @return 
+	 */
 	public boolean atkDispo(int choixAtk,Creature attaquant){
 		if (attaquant.getNbAtkDispo(choixAtk-1)>0) return true;
 		else {
@@ -74,7 +92,7 @@ public class Attaque {
 		attaquant.setNbAtkDispo(choixAtk-1, attaquant.getNbAtkDispo(choixAtk-1)-1);
 	}
 
-	public void calcDmg(int choixAtk,Creature attaquant,Creature attaquÈ){
+	public void calcDmg(int choixAtk,Creature attaquant,Creature attaqu√©){
 		System.out.println("CHOIXATK : " + choixAtk);
 		switch(choixAtk){
 		case 1:
@@ -97,26 +115,26 @@ public class Attaque {
 
 		switch(attaquant.getType()){
 		case 'e':
-			if(attaquÈ.getType()=='f'){ //L'eau est fort contre le feu
+			if(attaqu√©.getType()=='f'){ //L'eau est fort contre le feu
 				atkFort();
 			}
-			else if(attaquÈ.getType()=='p'){ //L'eau est faible contre la plante
+			else if(attaqu√©.getType()=='p'){ //L'eau est faible contre la plante
 				atkFaible();
 			}
 			break;
 		case 'f':
-			if(attaquÈ.getType()=='p'){ //Le feu est fort contre la plante
+			if(attaqu√©.getType()=='p'){ //Le feu est fort contre la plante
 				atkFort();
 			}
-			else if(attaquÈ.getType()=='e'){ //Le feu est faible contre l'eau
+			else if(attaqu√©.getType()=='e'){ //Le feu est faible contre l'eau
 				atkFaible();
 			}
 			break;
 		case 'p':
-			if(attaquÈ.getType()=='e'){ //La plante est forte contre l'eau
+			if(attaqu√©.getType()=='e'){ //La plante est forte contre l'eau
 				atkFort(); 
 			}
-			else if(attaquÈ.getType()=='f'){ //La plante est faible contre le feu
+			else if(attaqu√©.getType()=='f'){ //La plante est faible contre le feu
 				atkFaible();
 			}
 			break;
